@@ -9,11 +9,12 @@ import {
   MaxFileSizeValidator,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import * as fs from 'fs';
 import { diskStorage, memoryStorage } from 'multer';
+import { AssetManagerService } from './asset-manager.service';
 
 @Controller('asset')
 export class AssetManagerController {
+  constructor(private assetManagerService: AssetManagerService) {}
   logger = new Logger('AssetManagerController');
   @Post('upload')
   @UseInterceptors(
@@ -41,26 +42,8 @@ export class AssetManagerController {
     file: Express.Multer.File,
   ) {
     try {
-      this.logger.debug(
-        `Uploading file..., ${file.originalname} as ${file.filename}`,
-      );
-      this.logger.debug(`File size: ${file.size}}`);
-      fs.mkdirSync('./uploads/files', { recursive: true });
-      fs.appendFile(
-        `./uploads/files/${new Date().getTime()}-${file.originalname.replace(
-          /\ /g,
-          '-',
-        )}`,
-        file.buffer,
-        { encoding: 'utf-8' },
-        (err) => {
-          if (err) {
-            this.logger.error(err);
-            throw err;
-          }
-          this.logger.debug(`File ${file.filename} saved successfully`);
-        },
-      );
+      this.logger.debug(`Uploading file..., ${file.originalname}`);
+      this.assetManagerService.store(file);
       return {
         message: 'File uploaded successfully 🎉',
       };
