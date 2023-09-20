@@ -45,7 +45,7 @@ export class Employment extends Model {
   source: string;
 
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
   })
   time: number; //year
 
