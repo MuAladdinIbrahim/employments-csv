@@ -45,14 +45,14 @@ export class Employment extends Model {
   source: string;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
   })
-  time: number; //year
+  time: string; //year
 
   @Column({
-    type: DataType.FLOAT,
+    type: DataType.STRING,
   })
-  obs_value: number;
+  obs_value: string;
 
   @Column({
     type: DataType.STRING,

@@ -42,6 +42,11 @@ export class ParserService<T> {
         null,
         {
           separator: ',',
+          bom: true, //TODO not working in this package, check it again
+          // mapHeaders: ({ header, value }) => { //TODO may used to rename all headers and adjust values
+          //   if (header === 'ref_area') return 'country';
+          //   else return header;
+          // },
         },
       );
       // chunk entittes to be added to db
@@ -58,4 +63,16 @@ export class ParserService<T> {
     }
   }
 }
-class Entity {}
+class Entity {
+  ref_area: string;
+  indicator: string;
+  source: string;
+  sex: string;
+  classif1: string;
+  time: string;
+  obs_value: string;
+  obs_status: string;
+  note_classif: string;
+  note_indicator: string;
+  note_source: string;
+}

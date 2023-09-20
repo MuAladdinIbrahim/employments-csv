@@ -17,6 +17,9 @@ import { Employment } from 'src/DAL/employment/employment.model';
         autoLoadModels: true,
         models: [Employment],
         synchronize: true,
+        sync: {
+          force: true,
+        },
       }),
       inject: [ConfigService],
     }),
