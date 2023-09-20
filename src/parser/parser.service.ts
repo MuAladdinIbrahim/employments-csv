@@ -3,12 +3,13 @@ import { OnEvent } from '@nestjs/event-emitter';
 import * as fs from 'fs';
 import { CsvParser } from 'nest-csv-parser';
 import { IRepository } from 'src/DAL/Abstracts/IRepository';
+import { TYPES } from 'src/DAL/Abstracts/TYPES';
 
 @Injectable()
 export class ParserService<T> {
   logger: Logger;
   constructor(
-    @Inject('EMPLOYMENT_REPOSITORY') private repo: IRepository,
+    @Inject(TYPES.EMPLOYMENT_REPOSITORY) private repo: IRepository,
     private readonly csvParser: CsvParser,
   ) {
     this.logger = new Logger('ParserService');

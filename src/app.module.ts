@@ -4,6 +4,8 @@ import { configValidationSchema } from './infra/config.schema';
 import { AssetManagerModule } from './asset-manager/asset-manager.module';
 import { ParserModule } from './parser/parser.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { DatabaseModule } from './infra/DB/DbModule';
+import { EmploymentModule } from './employment/employment.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     }),
     AssetManagerModule,
     ParserModule,
+    DatabaseModule,
+    EmploymentModule,
   ],
   controllers: [],
   providers: [],
