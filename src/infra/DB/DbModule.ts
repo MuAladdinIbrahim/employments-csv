@@ -18,7 +18,7 @@ import { Employment } from 'src/DAL/employment/employment.model';
         models: [Employment],
         synchronize: true,
         sync: {
-          force: true,
+          // force: true,
         },
       }),
       inject: [ConfigService],

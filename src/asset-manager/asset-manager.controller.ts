@@ -12,7 +12,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage, memoryStorage } from 'multer';
 import { AssetManagerService } from './asset-manager.service';
 
-@Controller('asset')
+@Controller('assets')
 export class AssetManagerController {
   logger: Logger;
   constructor(private assetManagerService: AssetManagerService) {

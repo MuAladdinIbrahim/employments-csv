@@ -10,10 +10,11 @@ export default class SequelizeDbClient implements IRepository {
     this.logger = new Logger('SequelizeDbClient');
   }
 
-  async find(query: any): Promise<any> {
+  async find(query: any, options?: any): Promise<any> {
     return await this.model.findAll({
       where: query,
       raw: true,
+      attributes: options?.selections,
     });
   }
 

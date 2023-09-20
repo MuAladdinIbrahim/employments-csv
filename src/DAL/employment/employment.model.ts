@@ -22,7 +22,7 @@ export class Employment extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  ref_area: string;
+  country: string;
 
   @Column({
     type: DataType.STRING,
@@ -38,7 +38,10 @@ export class Employment extends Model {
 
   @Column({
     type: DataType.STRING,
+    allowNull: true,
   })
+  age_group: string;
+
   @Column({
     type: DataType.STRING,
   })
@@ -47,7 +50,7 @@ export class Employment extends Model {
   @Column({
     type: DataType.STRING,
   })
-  time: string; //year
+  year: string; //year
 
   @Column({
     type: DataType.STRING,
