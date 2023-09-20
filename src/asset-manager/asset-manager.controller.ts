@@ -14,8 +14,10 @@ import { AssetManagerService } from './asset-manager.service';
 
 @Controller('asset')
 export class AssetManagerController {
-  constructor(private assetManagerService: AssetManagerService) {}
-  logger = new Logger('AssetManagerController');
+  logger: Logger;
+  constructor(private assetManagerService: AssetManagerService) {
+    this.logger = new Logger('AssetManagerController');
+  }
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {

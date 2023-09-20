@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import { Logger } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 @Injectable()
 export class AssetManagerService {
-  logger = new Logger('AssetManagerService');
+  logger: Logger;
+  constructor(private eventEmitter: EventEmitter2) {
+    this.logger = new Logger('AssetManagerService');
+  }
+
   store(file: Express.Multer.File) {
     const fileName = `${new Date().getTime()}-${file.originalname.replace(
       /\ /g,
@@ -24,5 +30,9 @@ export class AssetManagerService {
         );
       },
     );
+    this.eventEmitter.emit('file.uploaded', {
+      fileName,
+      originalName: file.originalname,
+    });
   }
 }
