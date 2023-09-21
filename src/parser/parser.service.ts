@@ -2,16 +2,17 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import * as fs from 'fs';
 import { CsvParser } from 'nest-csv-parser';
-import { IRepository } from 'src/Abstracts/IRepository';
+import { IRepository } from '../Abstracts/IRepository';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { TYPES } from 'src/Abstracts/TYPES';
-
+import { Utils } from '../utils/utils';
 @Injectable()
 export class ParserService {
   logger: Logger;
   constructor(
-    @Inject(TYPES.EMPLOYMENT_REPOSITORY) private employmentRepo: IRepository,
-    @Inject(TYPES.COUNTRY_REPOSITORY) private countryRepo: IRepository,
+    @Inject(Utils.getConstants().EMPLOYMENT_REPOSITORY)
+    private employmentRepo: IRepository,
+    @Inject(Utils.getConstants().COUNTRY_REPOSITORY)
+    private countryRepo: IRepository,
     private readonly csvParser: CsvParser,
     private eventEmitter: EventEmitter2,
   ) {

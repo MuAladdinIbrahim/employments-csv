@@ -8,7 +8,7 @@ import {
   UpdatedAt,
   HasMany,
 } from 'sequelize-typescript';
-import { Employment } from 'src/employment/dal/employment.model';
+import { Employment } from '../../employment/dal/employment.model';
 
 @Table
 export class Country extends Model {

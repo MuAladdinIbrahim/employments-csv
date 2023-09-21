@@ -12,10 +12,10 @@ export class CountryController {
   async getEmployments(@Param() params: GetCountryEmpsDTO) {
     try {
       this.logger.log('/:countryCode/employments');
-      const employments = await this.countryService.getEmployments(
+      const country = await this.countryService.getCountryWithEmployments(
         params.countryCode,
       );
-      return employments;
+      return { data: country }; //TODO check what you need to return, maybe {data: country.employments count: country.employments.length}
     } catch (error) {
       this.logger.error(error);
       throw error;

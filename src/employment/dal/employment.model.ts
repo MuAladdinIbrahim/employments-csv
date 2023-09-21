@@ -9,7 +9,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Country } from 'src/country/dal/country.model';
+import { Country } from '../../country/dal/country.model';
 
 @Table
 export class Employment extends Model {

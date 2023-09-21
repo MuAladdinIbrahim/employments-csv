@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { CsvModule } from 'nest-csv-parser';
 import { ParserService } from './parser.service';
-import { injections } from 'src/injections';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Employment } from 'src/employment/dal/employment.model';
-import { EmploymentRepository } from 'src/employment/dal/employment.repo';
-import { Country } from 'src/country/dal/country.model';
-import { CountryRepository } from 'src/country/dal/country.repo';
+import { Employment } from '../employment/dal/employment.model';
+import { EmploymentRepository } from '../employment/dal/employment.repo';
+import { Country } from '../country/dal/country.model';
+import { CountryRepository } from '../country/dal/country.repo';
+import { Utils } from '../utils/utils';
 
 @Module({
   imports: [CsvModule, SequelizeModule.forFeature([Employment, Country])],
@@ -14,8 +14,8 @@ import { CountryRepository } from 'src/country/dal/country.repo';
     ParserService,
     EmploymentRepository,
     CountryRepository,
-    injections.EMP_REPO,
-    injections.COUNTRY_REPO,
+    Utils.getInjections().EMP_REPO,
+    Utils.getInjections().COUNTRY_REPO,
   ],
 })
 export class ParserModule {}

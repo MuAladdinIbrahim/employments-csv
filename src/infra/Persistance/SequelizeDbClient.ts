@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { IRepository } from 'src/Abstracts/IRepository';
+import { IRepository } from '../../Abstracts/IRepository';
 
 @Injectable()
 export default class SequelizeDbClient implements IRepository {

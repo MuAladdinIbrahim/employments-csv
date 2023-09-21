@@ -25,7 +25,7 @@ export class EmploymentController {
           ],
         },
       );
-      return employments;
+      return { data: employments, count: employments.length };
     } catch (error) {
       this.logger.error(error);
       throw error;
@@ -37,7 +37,7 @@ export class EmploymentController {
     try {
       this.logger.log('getEmployments');
       const employments = await this.employmentService.getEmployments(query);
-      return employments;
+      return { data: employments, count: employments.length };
     } catch (error) {
       this.logger.error(error);
       throw error;
@@ -52,7 +52,7 @@ export class EmploymentController {
       const employments = await this.employmentService.getEmployments({
         countryCode,
       });
-      return employments;
+      return { data: employments, count: employments.length };
     } catch (error) {
       this.logger.error(error);
       throw error;

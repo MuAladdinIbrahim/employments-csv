@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import SequelizeDbClient from 'src/infra/Persistance/SequelizeDbClient';
+import SequelizeDbClient from '../../infra/Persistance/SequelizeDbClient';
 import { Country } from './country.model';
 
 @Injectable()

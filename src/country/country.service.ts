@@ -1,19 +1,20 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { IRepository } from 'src/Abstracts/IRepository';
-import { TYPES } from 'src/Abstracts/TYPES';
+import { IRepository } from '../Abstracts/IRepository';
+import { Utils } from '../utils/utils';
 
 @Injectable()
 export class CountryService {
   logger: Logger;
   constructor(
-    @Inject(TYPES.COUNTRY_REPOSITORY) private countryRepo: IRepository,
+    @Inject(Utils.getConstants().COUNTRY_REPOSITORY)
+    private countryRepo: IRepository,
   ) {
     this.logger = new Logger('CountryService');
   }
 
-  async getEmployments(countryCode: string) {
+  async getCountryWithEmployments(countryCode: string) {
     try {
-      this.logger.log(`getEmployments for ${countryCode}`);
+      this.logger.log(`getCountryWithEmployments for ${countryCode}`);
       const country = await this.countryRepo.findOne(
         { code: countryCode },
         { include: 'employments', raw: false },

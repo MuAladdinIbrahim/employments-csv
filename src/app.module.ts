@@ -7,6 +7,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { DatabaseModule } from './infra/DB/DbModule';
 import { EmploymentModule } from './employment/employment.module';
 import { CountryModule } from './country/country.module';
+import { UtilsModule } from './utils/utils.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CountryModule } from './country/country.module';
     DatabaseModule,
     EmploymentModule,
     CountryModule,
+    UtilsModule,
   ],
   controllers: [],
   providers: [],
