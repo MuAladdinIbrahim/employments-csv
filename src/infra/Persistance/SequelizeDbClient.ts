@@ -1,11 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { IRepository } from 'src/DAL/Abstracts/IRepository';
-import { Employment } from 'src/DAL/employment/employment.model';
+import { IRepository } from 'src/Abstracts/IRepository';
 
 @Injectable()
 export default class SequelizeDbClient implements IRepository {
   logger: Logger;
-  constructor(public model: typeof Employment) {
+  constructor(public model: any) {
     this.model = model;
     this.logger = new Logger('SequelizeDbClient');
   }

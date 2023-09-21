@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Employment } from 'src/DAL/employment/employment.model';
 
 @Module({
   imports: [
@@ -15,7 +14,6 @@ import { Employment } from 'src/DAL/employment/employment.model';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         autoLoadModels: true,
-        models: [Employment],
         synchronize: true,
         sync: {
           // force: true,

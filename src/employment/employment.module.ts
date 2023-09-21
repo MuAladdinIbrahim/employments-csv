@@ -3,8 +3,8 @@ import { EmploymentService } from './employment.service';
 import { EmploymentController } from './employment.controller';
 import { injections } from 'src/injections';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Employment } from 'src/DAL/employment/employment.model';
-import { EmploymentRepository } from 'src/DAL/employment/employment.repo';
+import { Employment } from './dal/employment.model';
+import { EmploymentRepository } from './dal/employment.repo';
 
 @Module({
   imports: [SequelizeModule.forFeature([Employment])],

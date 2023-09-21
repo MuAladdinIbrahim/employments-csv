@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { IRepository } from 'src/DAL/Abstracts/IRepository';
-import { TYPES } from 'src/DAL/Abstracts/TYPES';
-import { Employment } from 'src/DAL/employment/employment.model';
+import { IRepository } from 'src/Abstracts/IRepository';
+import { TYPES } from 'src/Abstracts/TYPES';
+import { Employment } from './dal/employment.model';
 
 @Injectable()
 export class EmploymentService {
