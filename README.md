@@ -35,4 +35,4 @@ $ pnpm run test:cov
 ```
 
 ## Docs
- You can find the docs of the endpoints listed through open-api.yml file [TODO]
+ You can find the docs of the endpoints listed through {{url}}/docs
