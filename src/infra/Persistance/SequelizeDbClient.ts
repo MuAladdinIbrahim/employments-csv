@@ -12,13 +12,19 @@ export default class SequelizeDbClient implements IRepository {
   async find(query: any, options?: any): Promise<any> {
     return await this.model.findAll({
       where: query,
-      raw: true,
+      raw: options?.raw == undefined ? true : options?.raw,
       attributes: options?.selections,
+      include: options?.include,
     });
   }
 
-  async findOne(query: any): Promise<any> {
-    return await this.model.findOne(query);
+  async findOne(query: any, options?: any): Promise<any> {
+    return await this.model.findOne({
+      where: query,
+      raw: options?.raw == undefined ? true : options?.raw,
+      attributes: options?.selections,
+      include: options?.include,
+    });
   }
 
   async update(query: any, updates): Promise<any> {
@@ -39,7 +45,7 @@ export default class SequelizeDbClient implements IRepository {
 
   async bulkAdd(data: any): Promise<any> {
     try {
-      await this.model.bulkCreate(data);
+      return await this.model.bulkCreate(data);
     } catch (error) {
       this.logger.error(error);
       throw error;

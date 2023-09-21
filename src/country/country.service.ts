@@ -14,8 +14,11 @@ export class CountryService {
   async getEmployments(countryCode: string) {
     try {
       this.logger.log(`getEmployments for ${countryCode}`);
-      const employments = await this.countryRepo.findOne({ code: countryCode }); // JOIN employment
-      return employments;
+      const country = await this.countryRepo.findOne(
+        { code: countryCode },
+        { include: 'employments', raw: false },
+      );
+      return country;
     } catch (error) {
       this.logger.error(error);
       throw error;

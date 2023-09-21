@@ -6,7 +6,9 @@ import {
   Default,
   CreatedAt,
   UpdatedAt,
+  HasMany,
 } from 'sequelize-typescript';
+import { Employment } from 'src/employment/dal/employment.model';
 
 @Table
 export class Country extends Model {
@@ -21,6 +23,7 @@ export class Country extends Model {
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    unique: true,
   })
   code: string;
 
@@ -35,4 +38,7 @@ export class Country extends Model {
     type: DataType.DATE,
   })
   updatedAt: Date;
+
+  @HasMany(() => Employment)
+  employments: Employment[];
 }

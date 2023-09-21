@@ -6,7 +6,10 @@ import {
   Default,
   CreatedAt,
   UpdatedAt,
+  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
+import { Country } from 'src/country/dal/country.model';
 
 @Table
 export class Employment extends Model {
@@ -22,7 +25,7 @@ export class Employment extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  country: string;
+  countryCode: string;
 
   @Column({
     type: DataType.STRING,
@@ -88,4 +91,13 @@ export class Employment extends Model {
     type: DataType.DATE,
   })
   updatedAt: Date;
+
+  @ForeignKey(() => Country)
+  @Column({
+    type: DataType.UUID,
+  })
+  countryId: string;
+
+  @BelongsTo(() => Country)
+  country: Country;
 }

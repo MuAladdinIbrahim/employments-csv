@@ -5,9 +5,17 @@ import { injections } from 'src/injections';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Employment } from 'src/employment/dal/employment.model';
 import { EmploymentRepository } from 'src/employment/dal/employment.repo';
+import { Country } from 'src/country/dal/country.model';
+import { CountryRepository } from 'src/country/dal/country.repo';
 
 @Module({
-  imports: [CsvModule, SequelizeModule.forFeature([Employment])],
-  providers: [ParserService, EmploymentRepository, injections.EMP_REPO],
+  imports: [CsvModule, SequelizeModule.forFeature([Employment, Country])],
+  providers: [
+    ParserService,
+    EmploymentRepository,
+    CountryRepository,
+    injections.EMP_REPO,
+    injections.COUNTRY_REPO,
+  ],
 })
 export class ParserModule {}

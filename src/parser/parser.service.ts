@@ -10,7 +10,8 @@ import { TYPES } from 'src/Abstracts/TYPES';
 export class ParserService {
   logger: Logger;
   constructor(
-    @Inject(TYPES.EMPLOYMENT_REPOSITORY) private repo: IRepository,
+    @Inject(TYPES.EMPLOYMENT_REPOSITORY) private employmentRepo: IRepository,
+    @Inject(TYPES.COUNTRY_REPOSITORY) private countryRepo: IRepository,
     private readonly csvParser: CsvParser,
     private eventEmitter: EventEmitter2,
   ) {
@@ -44,19 +45,37 @@ export class ParserService {
           separator: ',',
           bom: true, //TODO not working in this package, check it again
           mapHeaders: ({ header, value }) => {
-            if (header === 'ref_area') return 'country';
+            if (header === 'ref_area') return 'countryCode';
             if (header === 'time') return 'year';
             if (header === 'classif1') return 'age_group';
             else return header;
           },
         },
       );
+      const countriesMap = new Map();
+      for (let i = 0; i < entities.list?.length; i++) {
+        countriesMap.set(entities.list[i].countryCode, {
+          code: entities.list[i].countryCode,
+        });
+      }
+      const countries = await this.countryRepo.bulkAdd([
+        ...countriesMap.values(),
+      ]);
+      const countriesIdsMap = new Map();
+      for (let i = 0; i < countries.length; i++) {
+        countriesIdsMap.set(countries[i].code, countries[i].id);
+      }
+      for (let i = 0; i < entities.list?.length; i++) {
+        entities.list[i].countryId = countriesIdsMap.get(
+          entities.list[i].countryCode,
+        );
+      }
       // chunk entittes to be added to db
       const chunkSize = 500;
       const addChunkPromises = [];
       for (let i = 0; i < entities.list?.length; i = i + chunkSize) {
         const list = entities.list.slice(i, i + chunkSize);
-        addChunkPromises.push(this.repo.bulkAdd(list));
+        addChunkPromises.push(this.employmentRepo.bulkAdd(list));
       }
       await Promise.all(addChunkPromises);
     } catch (error) {

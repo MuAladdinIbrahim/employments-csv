@@ -1,6 +1,6 @@
 import { Controller, Get, Logger, Param } from '@nestjs/common';
 import { CountryService } from './country.service';
-import { GetCountryEmpsDTO } from './Dto/GetCountryEmpsDto';
+import { GetCountryEmpsDTO } from './Dto/get-country-emps.dto';
 
 @Controller('countries')
 export class CountryController {
@@ -8,10 +8,10 @@ export class CountryController {
   constructor(private countryService: CountryService) {
     this.logger = new Logger('CountryController');
   }
-  @Get('/:country/employments')
+  @Get('/:countryCode/employments')
   async getEmployments(@Param() params: GetCountryEmpsDTO) {
     try {
-      this.logger.log('/:country/employments');
+      this.logger.log('/:countryCode/employments');
       const employments = await this.countryService.getEmployments(
         params.countryCode,
       );

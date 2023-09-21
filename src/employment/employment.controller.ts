@@ -1,6 +1,6 @@
 import { Controller, Get, Logger, Param, Query } from '@nestjs/common';
-import { GetEmpByCountryDTO } from './Dto/GetEmpByCountryDto';
-import { GetEmpQueryDTO } from './Dto/GetEmpQueryDto';
+import { GetEmpByCountryDTO } from './Dto/get-emp-by-country.dto';
+import { GetEmpQueryDTO } from './Dto/get-emp-query.dto';
 import { EmploymentService } from './employment.service';
 
 @Controller('employments')
@@ -18,7 +18,12 @@ export class EmploymentController {
       const lastYear = (new Date().getFullYear() - 1).toString();
       const employments = await this.employmentService.getEmployments(
         { year: lastYear },
-        { selections: ['country', ['obs_value', 'value']] },
+        {
+          selections: [
+            ['countryCode', 'country'],
+            ['obs_value', 'value'],
+          ],
+        },
       );
       return employments;
     } catch (error) {
@@ -39,13 +44,13 @@ export class EmploymentController {
     }
   }
 
-  @Get('/:country')
+  @Get('/:countryCode')
   async getEmploymentsOfCountry(@Param() params: GetEmpByCountryDTO) {
     try {
       this.logger.log('getEmploymentsOfCountry');
-      const country = params.country;
+      const countryCode = params.countryCode;
       const employments = await this.employmentService.getEmployments({
-        country,
+        countryCode,
       });
       return employments;
     } catch (error) {
